@@ -11,6 +11,8 @@ connectDB()
 
 const server = express()
 
+//Middlewares
+server.use(express.json())
 
 //Routes
 server.use('/api/projects', projectRoutes)
