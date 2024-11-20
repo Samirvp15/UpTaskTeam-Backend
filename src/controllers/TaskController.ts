@@ -7,23 +7,16 @@ export class TaskController {
 
     static createTask= async (req: Request, res: Response) => {
 
-        const { projectId } = req.params
-        const project = await Project.findById(projectId)
-        
-        if (!project) {
-            const error = new Error('Proyecto no encontrado')
-            res.status(404).json({ error: error.message })
-            return
-        }
         
         try {
             const task = new Task(req.body)
             // ASIGNAR PROYECTO A TAREA
-            task.project = project.id
+            task.project = req.project.id
            // AGREGAR UNA TAREA O ARRAY DE TAREAS A PROYECTO
-            project.tasks.push(task.id)
-            await task.save()
-            await project.save()
+            req.project.tasks.push(task.id)
+
+            //MEJORAR LA PERFORMANCE DE LOS AWAIT
+            Promise.allSettled([task.save,req.project.save()])
             res.send('Tarea creada correctamente')
 
         } catch (error) {
