@@ -60,7 +60,7 @@ router.post('/:projectId/tasks',
 
 router.get('/:projectId/tasks',
     validateProjectExists,
-    TaskController.getProjectsTasks
+    TaskController.getProjectTasks
 )
 
 
