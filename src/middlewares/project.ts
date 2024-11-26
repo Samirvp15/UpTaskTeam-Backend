@@ -13,7 +13,6 @@ declare global {
 
 export async function validateProjectExists(req: Request, res: Response, next: NextFunction) {
 
-
     try {
         const { projectId } = req.params
         const project = await Project.findById(projectId)
@@ -29,7 +28,7 @@ export async function validateProjectExists(req: Request, res: Response, next: N
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: 'Error Server' })
+        res.status(400).json({ error: 'Proyecto no valido' })
     }
 
 
