@@ -22,7 +22,7 @@ export class ProjectController {
 
         try {
             await project.save()
-            res.send(' projecto creado')
+            res.send('Proyecto Creado Correctamente')
 
         } catch (error) {
             console.log(error)
